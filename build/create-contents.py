@@ -31,7 +31,7 @@ def dfs(path,relative_path,deep):
 		pass
 	elif isdir(path):
 		if deep == 0:
-			target += '#'*(deep+2) + f' {f}\n'
+			target += '\n' + '#'*(deep+2) + f' {f}\n'
 		else:
 			target += '  '*(deep) + f'- {f}\n'
 		dirs = glob.glob(path + '/*');
