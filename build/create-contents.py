@@ -24,21 +24,20 @@ suffixs =[s.strip() for s in str.split(conf['page-suffix'],',')]
 def dfs(path,relative_path,deep):
 	global target
 	d, f = os.path.split(path)
-	if(isfile(path)):
+	if(isfile(path) and sum((path[-len(suf):] == suf for suf in suffixs)) >=1):
 		d, f = os.path.split(path)
-		target += '  '*(deep+1) +  f'- [{f}]({relative_path}/{f})\n'
+		target += '  '*(deep) +  f'- [{f}]({relative_path}/{f})\n'
 		pass
 	else:
 		if deep == 0:
 			target += '#'*(deep+2) + f' {f}\n'
 		else:
 			target += '  '*(deep) + f'- {f}\n'
-		for new_path in glob.glob(path + '/*'):
+		dirs = glob.glob(path + '/*');
+		dirs.sort(key = lambda e:os.path.getmtime(e),reverse=True)
+		for new_path in dirs:
 			dfs(new_path,relative_path+f'/{f}',deep + 1)
-
-for path in list(filter(lambda i:isdir(i), glob.glob(root + '/*'))):
-	dfs(path,'.',0)
-
+dfs(root,'.',0)
 f = os.open(os.path.join(root, './index.md'),os.O_RDWR)
 os.write(f,str.encode(target,'utf-8'))
 os.close(f)
