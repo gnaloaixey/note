@@ -20,6 +20,7 @@ root = os.path.join(dirname,conf['root']);
 
 suffixs =[s.strip() for s in str.split(conf['page-suffix'],',')] 
 
+sortBy = lambda e:os.path.getmtime(e)
 # 遍历root下的目录
 def dfs(path,relative_path,deep):
 	global target
@@ -34,10 +35,14 @@ def dfs(path,relative_path,deep):
 		else:
 			target += '  '*(deep) + f'- {f}\n'
 		dirs = glob.glob(path + '/*');
-		dirs.sort(key = lambda e:os.path.getmtime(e),reverse=True)
+		dirs.sort(key = sortBy,reverse=True)
 		for new_path in dirs:
 			dfs(new_path,relative_path+f'/{f}',deep + 1)
-dfs(root,'.',0)
+# 可以限制根目录只识别子文件
+dirs = glob.glob(root + '/*');
+dirs.sort(key = sortBy,reverse=True)
+for dir in dirs:
+	dfs(dir,'.',0)
 f = os.open(os.path.join(root, './index.md'),os.O_RDWR)
 os.write(f,str.encode(target,'utf-8'))
 os.close(f)
