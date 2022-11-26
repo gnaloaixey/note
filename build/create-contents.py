@@ -14,7 +14,7 @@ config_file.close()
 
 # 开始
 # 目标字符串
-target = f'# {conf["title"]}\n'
+target = f'# {conf["title"]}\n* tips:{conf["tips"]}'
 
 root = os.path.join(dirname,conf['root']);
 

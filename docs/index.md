@@ -1,5 +1,5 @@
 # Contents
-
+* tips:math suppost chrome MathJax Plugin for Github
 ## md
   - 智能计算系统
     - 复习

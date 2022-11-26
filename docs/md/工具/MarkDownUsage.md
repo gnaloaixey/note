@@ -135,7 +135,6 @@ _注：链接包含图片_
 
 ## 2. 数学公式
 
-
 $$
 
 \begin{align*}
@@ -145,6 +144,7 @@ E(S^2)	&=E\left(\frac{1}{2n} \sum_{i=1}^n (X_i-\bar{X})^2\right)    \\
 &	=DX + (EX)^2 - D\bar{X} - (E\bar{X})^2	    \\
 &	=\frac{n-1}{n}DX
 \end{align*}
+
 
 $$
 
