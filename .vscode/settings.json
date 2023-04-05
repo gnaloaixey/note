@@ -1,4 +1,7 @@
 {
+	"prettier.useTabs": false,
+	"editor.insertSpaces": true,
+	"editor.detectIndentation": false,
 	"editor.fontSize": 18,
 	"files.autoSave": "onFocusChange"
 }
